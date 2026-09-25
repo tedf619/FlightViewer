@@ -11,12 +11,12 @@ namespace FlightViewer;
 /// </summary>
 public class AdsbService
 {
-  readonly HttpClient _httpClient;
+  readonly HttpClient httpClient;
 
   public AdsbService()
   {
-    _httpClient = new HttpClient();
-    _httpClient.BaseAddress = new Uri("https://api.adsb.lol/v2/");
+    httpClient = new HttpClient();
+    httpClient.BaseAddress = new Uri("https://api.adsb.lol/v2/");
   }
 
   public async Task<List<FlightData>> FetchFlightsAsync(double latitude, double longitude, int radius)
@@ -25,10 +25,10 @@ public class AdsbService
 
     try
     {
-      _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("FlightViewer/1.0");
+      httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("FlightViewer/1.0");
       var request = $"lat/{latitude}/lon/{longitude}/dist/{radius}";
 
-      var response = await _httpClient.GetAsync(request);
+      var response = await httpClient.GetAsync(request);
 
       if (response.StatusCode == HttpStatusCode.TooManyRequests)  // the web service throttles requests
       {

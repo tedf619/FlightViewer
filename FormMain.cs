@@ -17,7 +17,7 @@ public partial class FormMain : Form
     ShowFlightsAsync();
   }
 
-  void timerRefreshCountdown_Tick(object sender, EventArgs e)
+  void TimerRefreshCountdown_Tick(object sender, EventArgs e)
   {
     refreshCountdown--;
     labelStatusBarRefreshCountdown.Text = $"Refresh in {refreshCountdown} secs";
@@ -28,7 +28,7 @@ public partial class FormMain : Form
     ShowFlightsAsync();
   }
 
-  void textBoxFilterByFlightNumber_KeyDown(object sender, KeyEventArgs e)
+  void TextBoxFilterByFlightNumber_KeyDown(object sender, KeyEventArgs e)
   {
     if (e.KeyCode != Keys.Enter) return;
 
@@ -36,7 +36,7 @@ public partial class FormMain : Form
     ApplyFilter();
   }
 
-  void buttonApplyFilter_Click(object sender, EventArgs e)
+  void ButtonApplyFilter_Click(object sender, EventArgs e)
   {
     ApplyFilter();
   }

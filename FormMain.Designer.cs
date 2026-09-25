@@ -67,7 +67,7 @@ namespace FlightViewer
       buttonApplyFilter.Text = "Apply Filter";
       toolTip.SetToolTip(buttonApplyFilter, "Filter the displayed flights with the data entered");
       buttonApplyFilter.UseVisualStyleBackColor = true;
-      buttonApplyFilter.Click += buttonApplyFilter_Click;
+      buttonApplyFilter.Click += ButtonApplyFilter_Click;
       // 
       // label11
       // 
@@ -86,12 +86,12 @@ namespace FlightViewer
       textBoxFilterByFlightNumber.Size = new Size(118, 23);
       textBoxFilterByFlightNumber.TabIndex = 3;
       toolTip.SetToolTip(textBoxFilterByFlightNumber, "Enter the airline code without numbers to see all flights for a given airline");
-      textBoxFilterByFlightNumber.KeyDown += textBoxFilterByFlightNumber_KeyDown;
+      textBoxFilterByFlightNumber.KeyDown += TextBoxFilterByFlightNumber_KeyDown;
       // 
       // flightViewer
       // 
       flightViewer.Bearing = 0F;
-      flightViewer.BorderStyle = BorderStyle.Fixed3D;
+      flightViewer.BorderStyle = BorderStyle.FixedSingle;
       flightViewer.Dock = DockStyle.Fill;
       flightViewer.EmptyTileColor = Color.Black;
       flightViewer.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
@@ -255,7 +255,7 @@ namespace FlightViewer
       // 
       timerRefreshCountdown.Enabled = true;
       timerRefreshCountdown.Interval = 1000;
-      timerRefreshCountdown.Tick += timerRefreshCountdown_Tick;
+      timerRefreshCountdown.Tick += TimerRefreshCountdown_Tick;
       // 
       // FormMain
       // 

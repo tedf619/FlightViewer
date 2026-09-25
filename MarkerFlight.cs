@@ -19,8 +19,8 @@ internal class MarkerFlight : GMapMarker
       : base(position)
   {
     CallSign = callsign;
-    Heading = (float) heading;
-    AltitudeFeet = (float) altitudeFeet;
+    Heading = (float)heading;
+    AltitudeFeet = (float)altitudeFeet;
     IsSelected = isSelected;
 
     // Define bounding dimensions
@@ -67,7 +67,7 @@ internal class MarkerFlight : GMapMarker
       _ => purple
     };
 
-    if (IsSelected) 
+    if (IsSelected)
       planeColor = red;
 
     var state = g.Save();  // save matrix transforms before making changes to it
@@ -85,12 +85,12 @@ internal class MarkerFlight : GMapMarker
 
     PointF[] shape = new PointF[]
     {
-                  new PointF(0, -9), new PointF(2, -3), new PointF(8, 2),
-                  new PointF(8, 4), new PointF(2, 2), new PointF(2, 6),
-                  new PointF(5, 8), new PointF(5, 9), new PointF(0, 7),
-                  new PointF(-5, 9), new PointF(-5, 8), new PointF(-2, 6),
-                  new PointF(-2, 2), new PointF(-8, 4), new PointF(-8, 2),
-                  new PointF(-2, -3)
+      new PointF(0, -9), new PointF(2, -3), new PointF(8, 2),
+      new PointF(8, 4), new PointF(2, 2), new PointF(2, 6),
+      new PointF(5, 8), new PointF(5, 9), new PointF(0, 7),
+      new PointF(-5, 9), new PointF(-5, 8), new PointF(-2, 6),
+      new PointF(-2, 2), new PointF(-8, 4), new PointF(-8, 2),
+      new PointF(-2, -3)
     };
 
     g.FillPolygon(brush, shape);

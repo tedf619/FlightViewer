@@ -9,7 +9,7 @@ namespace FlightViewer;
 
 public partial class FlightViewer : GMap.NET.WindowsForms.GMapControl
 {
-  private readonly AdsbService flightService = new();
+  readonly AdsbService flightService = new();
 
   const double UsMinLat = 24.5;   // Southern border
   const double UsMaxLat = 53.0;   // Northern border
@@ -29,8 +29,8 @@ public partial class FlightViewer : GMap.NET.WindowsForms.GMapControl
 
     base.MouseWheel += GMapControl_MouseWheel;
 
-    MinZoom = 4;
-    MaxZoom = 8;  // values appropriate for the continental US map
+    base.MinZoom = 4;
+    base.MaxZoom = 8;  // values appropriate for the continental US map
 
     continentalUsArea = RectLatLng.FromLTRB(UsMinLng, UsMaxLat, UsMaxLng, UsMinLat);
 
@@ -85,10 +85,8 @@ public partial class FlightViewer : GMap.NET.WindowsForms.GMapControl
     double usCenterLat = UsMinLat + (UsMaxLat - UsMinLat) / 2;
     double usCenterLon = UsMinLng + (UsMaxLng - UsMinLng) / 2;
 
-    var results = await flightService.FetchFlightsAsync(usCenterLat, usCenterLon, radius: 100); // covers continental US
-    if (results == null) return (9, 0);
-
-    allFlights = results;
+    allFlights = await flightService.FetchFlightsAsync(usCenterLat, usCenterLon, radius: 1600); // covers continental US
+    if (allFlights == null) return (0, 0);
 
     return AddFlightMarkers();
   }
