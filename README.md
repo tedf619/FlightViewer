@@ -346,10 +346,9 @@ Most of the marker code is devoted to rendering. The OnRender method basically c
       _ => purple
     };
 
-    if (IsSelected) 
+    if (IsSelected)
       planeColor = red;
 
-    var state = g.Save();  // save matrix transforms before making changes to it
 
     // move the plane to the center of the screen
     g.TranslateTransform(LocalPosition.X - Offset.X, LocalPosition.Y - Offset.Y);
@@ -364,23 +363,21 @@ Most of the marker code is devoted to rendering. The OnRender method basically c
 
     PointF[] shape = new PointF[]
     {
-        new PointF(0, -9), new PointF(2, -3), new PointF(8, 2),
-        new PointF(8, 4), new PointF(2, 2), new PointF(2, 6),
-        new PointF(5, 8), new PointF(5, 9), new PointF(0, 7),
-        new PointF(-5, 9), new PointF(-5, 8), new PointF(-2, 6),
-        new PointF(-2, 2), new PointF(-8, 4), new PointF(-8, 2),
-        new PointF(-2, -3)
+      new PointF(0, -9), new PointF(2, -3), new PointF(8, 2),
+      new PointF(8, 4), new PointF(2, 2), new PointF(2, 6),
+      new PointF(5, 8), new PointF(5, 9), new PointF(0, 7),
+      new PointF(-5, 9), new PointF(-5, 8), new PointF(-2, 6),
+      new PointF(-2, 2), new PointF(-8, 4), new PointF(-8, 2),
+      new PointF(-2, -3)
     };
 
     g.FillPolygon(brush, shape);
     g.DrawPolygon(pen, shape);
-
-    g.Restore(state);  // restore the original matrix transforms
   }
+}
 ```
 *Listing 7* - Drawing each aircraft.
 
-The code ```var state = g.Save()``` saves the state of the Graphics space before we manipulate it. Once done drawing the aircraft, we restore the old Graphics state with the code ```g.Restore(state)```.
 To draw each aircraft at the proper position and with the proper heading, we need to do a translation and rotation of the Graphics surface.
 First we move the surface so the aircraft is shown centered with the code 
 
@@ -408,7 +405,8 @@ With the graphics surface transformed like this, we draw the outline of the airc
 ```
 *Listing 7* - Drawing each aircraft using a polygon.
 
-After drawing the plane, we restore the Graphics surface to its original state.
+The method OnRender saves the initial state of the Graphics surface 
+before calling DrawPlane. It then restores the Graphics surface after drawing the plane.
 
 ## Showing Flights on the Map
 
