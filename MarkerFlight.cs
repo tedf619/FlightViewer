@@ -32,10 +32,8 @@ internal class MarkerFlight : GMapMarker
 
   public override void OnRender(Graphics g)
   {
-    //if (_icon == null) return;
-
     // Save original graphics state matrix
-    Matrix originalState = g.Transform;
+    var state = g.Save();  // save matrix transforms before making changes to it
 
     // Enable smooth rotation rendering
     g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -48,7 +46,7 @@ internal class MarkerFlight : GMapMarker
     finally
     {
       // Restore original transform matrix so subsequent map layers render correctly
-      g.Transform = originalState;
+      g.Restore(state);
     }
   }
 
@@ -70,7 +68,6 @@ internal class MarkerFlight : GMapMarker
     if (IsSelected)
       planeColor = red;
 
-    var state = g.Save();  // save matrix transforms before making changes to it
 
     // move the plane to the center of the screen
     g.TranslateTransform(LocalPosition.X - Offset.X, LocalPosition.Y - Offset.Y);
@@ -95,7 +92,5 @@ internal class MarkerFlight : GMapMarker
 
     g.FillPolygon(brush, shape);
     g.DrawPolygon(pen, shape);
-
-    g.Restore(state);  // restore the original matrix transforms
   }
 }
