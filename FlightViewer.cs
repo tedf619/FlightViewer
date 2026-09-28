@@ -27,8 +27,6 @@ public partial class FlightViewer : GMap.NET.WindowsForms.GMapControl
   {
     InitializeComponent();
 
-    base.MouseWheel += GMapControl_MouseWheel;
-
     base.MinZoom = 4;
     base.MaxZoom = 8;  // values appropriate for the continental US map
 
@@ -60,6 +58,7 @@ public partial class FlightViewer : GMap.NET.WindowsForms.GMapControl
     base.MapProvider = OpenStreetMapProvider.Instance;
     base.Zoom = 4; // to show the entire US at startup
     base.ShowCenter = false; // hide the red crosshair in map's center
+    base.IgnoreMarkerOnMouseWheel = true; // so zooming works when on a flight marker
 
     // configure missing tiles
     base.EmptyTileText = string.Empty;
@@ -165,21 +164,6 @@ public partial class FlightViewer : GMap.NET.WindowsForms.GMapControl
         }
       }
     }
-  }
-
-  void GMapControl_MouseWheel(object? sender, MouseEventArgs e)
-  {
-    if (e.Delta > 0)
-    {
-      base.Zoom = Math.Min(base.MaxZoom, base.Zoom + 1);
-    }
-    else if (e.Delta < 0)
-    {
-      base.Zoom = Math.Max(base.MinZoom, base.Zoom - 1);
-    }
-
-    // Suppress further handling so default map processing doesn't double-zoom
-    ((HandledMouseEventArgs)e).Handled = true;
   }
 }
 
